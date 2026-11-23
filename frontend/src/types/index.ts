@@ -59,7 +59,9 @@ export interface BioDose {
   unprotected_dose_ug: number;
   n95_protected_dose_ug: number;
   dose_saved_ug: number;
-  cigarette_equivalent: number;
+  who_benchmark_ratio: number;
+  risk_tier: string;
+  respiration_rate_m3h: number;
   assumptions: string;
 }
 

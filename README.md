@@ -154,4 +154,19 @@ Compiled cleanly in under 1 second with 0 lint/TypeScript warnings.
 - **Ethical Integrity:** Clean original implementation, zero plagiarized templates, verified live sensor integration, and complete data transparency.
 
 ---
+## 📚 Comprehensive Documentation Index
+The full project documentation suite is organized in `docs/`:
+1. [Official Event Rules & Requirements](docs/OFFICIAL_RULES_AND_REQUIREMENTS.md) — Verified Hack2skill rules, deadlines, and criteria.
+2. [Project Overview](docs/PROJECT_OVERVIEW.md) — Problem context, target personas, and core pillars.
+3. [Technical Architecture](docs/TECHNICAL_ARCHITECTURE.md) — Component diagrams, subsystem designs, and data flow.
+4. [API Documentation](docs/API_DOCUMENTATION.md) — Complete REST endpoint directory with parameters & schemas.
+5. [Automated Test Report](docs/TEST_REPORT.md) — 100% passing backend integration and frontend build tests.
+6. [Security & Data Integrity Audit](docs/SECURITY_AUDIT.md) — Zero-leakage verification and compliance report.
+7. [Official Submission Form Package](docs/PROJECT_SUBMISSION.md) — Field-by-field copy ready for portal submission.
+8. [Technical Blog](docs/TECHNICAL_BLOG.md) — Full in-depth engineering article ready for publishing.
+9. [LinkedIn #BuildInPublic Draft](docs/LINKEDIN_BUILD_IN_PUBLIC.md) — Ready-to-post narrative with official hashtags.
+10. [November 29 Submission Checklist](docs/FINAL_SUBMISSION_CHECKLIST.md) — 1-page step-by-step deadline action guide.
+
+---
+
 *Built with ❤️ in India by Rajiv Kumar Sharma for Google for Developers × Hack2skill.*

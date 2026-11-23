@@ -15,6 +15,8 @@ async def main():
     print("\nTesting Bio-Dose Calculation...")
     dose = calculate_bio_dose(85.0, hours_outdoor=2.0, activity_level="moderate")
     print("Dose Result:", dose)
+    assert "who_benchmark_ratio" in dose
+    assert "risk_tier" in dose
 
     print("\nTesting Routine Generation...")
     routine = await generate_personalized_routine(aqi_data, profile="child")

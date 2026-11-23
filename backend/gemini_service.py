@@ -13,11 +13,15 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 
 def calculate_bio_dose(pm25: float, hours_outdoor: float, activity_level: str = "moderate") -> Dict[str, Any]:
     """
-    Computes inhaled PM2.5 particulate mass dose (µg) based on ventilation rate:
-    - Resting/Indoor: ~0.5 m³/h
-    - Light/Commute: ~1.0 m³/h
+    Computes inhaled PM2.5 particulate mass dose (µg) based on ICRP (International Commission
+    on Radiological Protection) Human Respiratory Tract Model ventilation rates:
+    - Resting/Sedentary: ~0.5 m³/h
+    - Light transit/standing: ~1.0 m³/h
     - Moderate walking: ~1.3 m³/h
     - Vigorous cardio/running: ~2.5 m³/h
+
+    Compares against WHO 24-hour guideline exposure benchmark:
+    WHO 24h benchmark: 15 µg/m³ ambient concentration across daily inhalation (~12 m³/day = 180 µg/day; ~7.5 µg/h).
     """
     rates = {
         "rest": 0.5,
@@ -25,21 +29,35 @@ def calculate_bio_dose(pm25: float, hours_outdoor: float, activity_level: str = 
         "moderate": 1.3,
         "vigorous": 2.5
     }
-    rate = rates.get(activity_level.lower(), 1.2)
+    rate = rates.get(activity_level.lower(), 1.3)
     # Dose in micrograms (µg)
     unprotected_dose = round(pm25 * rate * hours_outdoor, 1)
-    # N95 reduces exposure by ~95% when properly fitted
+    # Certified N95 reduces inhalable fine particles by ~95% when tightly sealed
     n95_dose = round(unprotected_dose * 0.05, 1)
     dose_saved = round(unprotected_dose - n95_dose, 1)
-    # Cigarette equivalence approximation (approx. 22 µg PM2.5 inhaled per cigarette)
-    cigarette_equiv = round(unprotected_dose / 22.0, 1)
+    
+    # WHO 24-hour baseline reference dose for equivalent duration (7.5 µg/h * hours)
+    who_baseline_dose = round(7.5 * hours_outdoor, 1)
+    who_benchmark_ratio = round(unprotected_dose / max(who_baseline_dose, 1.0), 1)
+
+    # Risk tier based on dose accumulation
+    if who_benchmark_ratio <= 1.0:
+        risk_tier = "Within WHO Daily Guideline"
+    elif who_benchmark_ratio <= 3.0:
+        risk_tier = "Moderate Inhalation Dose"
+    elif who_benchmark_ratio <= 6.0:
+        risk_tier = "High Inhalation Dose"
+    else:
+        risk_tier = "Severe Inhalation Exposure"
 
     return {
         "unprotected_dose_ug": unprotected_dose,
         "n95_protected_dose_ug": n95_dose,
         "dose_saved_ug": dose_saved,
-        "cigarette_equivalent": cigarette_equiv,
-        "assumptions": f"Assumes {rate} m³/h respiration rate over {hours_outdoor}h at measured {pm25} µg/m³ PM2.5."
+        "who_benchmark_ratio": who_benchmark_ratio,
+        "risk_tier": risk_tier,
+        "respiration_rate_m3h": rate,
+        "assumptions": f"Assumes {rate} m³/h respiration rate (ICRP respiratory tract model) over {hours_outdoor}h at measured {pm25} µg/m³ PM2.5."
     }
 
 async def generate_personalized_routine(aqi_data: Dict[str, Any], profile: str = "adult") -> Dict[str, Any]:
@@ -113,7 +131,7 @@ async def generate_personalized_routine(aqi_data: Dict[str, Any], profile: str =
         commute = "Take Delhi Metro / underground rail or sealed AC buses. If driving, set car ventilation to 'Internal Recirculation (Cabin Loop)'."
         ventilation = "Strict window sealing during morning (6:00 AM - 10:30 AM). Safe micro-ventilation only between 1:00 PM - 3:00 PM if needed."
         evening = "Avoid outdoor dining or prolonged park walks. Run indoor air purifiers on medium fan speed."
-        exp = f"At AQI {us_aqi} (PM2.5: {pm25} µg/m³), fine particulates bypass nasal cilia and penetrate terminal alveoli. A 2-hour unprotected walk delivers {bio_dose['unprotected_dose_ug']} µg of particulates (~{bio_dose['cigarette_equivalent']} cigarettes eq.)."
+        exp = f"At AQI {us_aqi} (PM2.5: {pm25} µg/m³), fine particulates bypass nasal cilia and penetrate terminal alveoli. A 2-hour unprotected walk delivers an estimated {bio_dose['unprotected_dose_ug']} µg of particulates ({bio_dose['who_benchmark_ratio']}x higher than the proportional WHO 24h safety baseline)."
     else: # Severe / Hazardous
         mask = "N95 or N99 respirator with airtight facial seal MANDATORY for any step outdoors. Facial hair reduces seal effectiveness significantly."
         morning = "STRICTLY INDOOR. Do not jog or run outside. Elevated respiratory volume in toxic air causes acute alveolar and cardiovascular stress."

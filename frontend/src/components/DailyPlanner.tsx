@@ -53,7 +53,8 @@ export const DailyPlanner: React.FC = () => {
   const calculatedDose = Number((pm25 * rate * outdoorHours).toFixed(1));
   const n95Dose = Number((calculatedDose * 0.05).toFixed(1));
   const savedDose = Number((calculatedDose - n95Dose).toFixed(1));
-  const cigaretteEquiv = Number((calculatedDose / 22.0).toFixed(1));
+  const whoBaseline = Number((7.5 * outdoorHours).toFixed(1));
+  const whoBenchmarkRatio = Number((calculatedDose / Math.max(whoBaseline, 1.0)).toFixed(1));
 
   const profileOptions = [
     { key: 'adult', labelEn: 'General Adult', labelHi: 'वयस्क', icon: User },
@@ -270,11 +271,11 @@ export const DailyPlanner: React.FC = () => {
                 <div className="bg-red-950/30 border border-red-500/30 rounded-xl p-3 text-center">
                   <div className="text-[11px] text-red-300 font-medium">Unprotected Dose</div>
                   <div className="text-2xl font-black text-red-400 mt-1">{calculatedDose} <span className="text-xs">µg</span></div>
-                  <div className="text-[10px] text-red-400 mt-0.5">≈ {cigaretteEquiv} cigarettes inhaled</div>
+                  <div className="text-[10px] text-red-300 mt-0.5">{whoBenchmarkRatio}x WHO 24h Ref Baseline</div>
                 </div>
 
                 <div className="bg-emerald-950/30 border border-emerald-500/30 rounded-xl p-3 text-center">
-                  <div className="text-[11px] text-emerald-300 font-medium">With N95 Respirator</div>
+                  <div className="text-[11px] text-emerald-300 font-medium">With Certified N95</div>
                   <div className="text-2xl font-black text-emerald-400 mt-1">{n95Dose} <span className="text-xs">µg</span></div>
                   <div className="text-[10px] text-emerald-400 mt-0.5">{savedDose} µg (95%) filtered</div>
                 </div>
@@ -284,10 +285,13 @@ export const DailyPlanner: React.FC = () => {
               <div className="bg-slate-950 rounded-xl p-3 border border-slate-800/80 text-[11px] text-slate-400 space-y-1">
                 <div className="text-slate-300 font-semibold flex items-center gap-1.5">
                   <Info className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Mathematical Methodology</span>
+                  <span>Mathematical Methodology (ICRP Human Tract Model)</span>
                 </div>
                 <p>
-                  Formula: Inhaled Mass = Ambient PM2.5 ({pm25} µg/m³) × Respiratory Volume ({rate} m³/h) × Duration ({outdoorHours} h).
+                  Estimated Inhaled Mass = Ambient PM2.5 ({pm25} µg/m³) × Respiration Rate ({rate} m³/h) × Time ({outdoorHours} h).
+                </p>
+                <p className="text-[10px] text-slate-400 pt-0.5 italic">
+                  Note: Bio-Dose is a mathematical exposure estimate based on ambient sensors; not an individual medical diagnostic test.
                 </p>
               </div>
             </div>

@@ -104,8 +104,10 @@ export async function fetchRoutine(city: string = 'delhi', profile: string = 'ad
         unprotected_dose_ug: 360.0,
         n95_protected_dose_ug: 18.0,
         dose_saved_ug: 342.0,
-        cigarette_equivalent: 16.4,
-        assumptions: "Assumes 1.3 m³/h ventilation rate over 2 hours outdoors at measured PM2.5 levels."
+        who_benchmark_ratio: 24.0,
+        risk_tier: "Severe Inhalation Exposure",
+        respiration_rate_m3h: 1.3,
+        assumptions: "Assumes 1.3 m³/h ventilation rate (ICRP model) over 2 hours outdoors at measured PM2.5 levels."
       },
       scientific_explanation: "Fine particulate matter (PM2.5) bypasses upper respiratory cilia and lodges deep in alveolar gas-exchange tissues. Atmospheric winter inversion traps ground emissions.",
       limitations: "Advisory generated based on outdoor atmospheric sensor models. Individual exposure depends on indoor air tightness and mask fit.",

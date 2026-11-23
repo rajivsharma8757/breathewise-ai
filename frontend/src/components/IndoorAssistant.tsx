@@ -120,6 +120,9 @@ export const IndoorAssistant: React.FC = () => {
           <div className="text-[11px] font-semibold text-slate-400">Current Outdoor AQI</div>
           <div className="text-3xl font-black text-white my-1">{aqi}</div>
           <div className="text-[10px] text-slate-400">Outdoor PM2.5: {aqiData?.current.pollutants.pm2_5.value} µg/m³</div>
+          <div className="text-[9px] text-amber-400/80 mt-1 max-w-[140px] leading-tight">
+            Modeled from outdoor ambient sensors. Dedicated in-room sensor needed for indoor readings.
+          </div>
         </div>
       </div>
 
