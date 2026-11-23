@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/breathewise-ai/',
   plugins: [
     react(),
     tailwindcss(),
