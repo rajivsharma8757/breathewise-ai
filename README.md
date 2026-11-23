@@ -4,8 +4,20 @@
 [![PromptWars Virtual 2026](https://img.shields.io/badge/Event-PromptWars%20Virtual%202026-blue)](https://promptwars.in/promptwarsVirtual.html)
 [![Organizer](https://img.shields.io/badge/Organizers-Google%20for%20Developers%20%C3%97%20Hack2skill-green)](https://hack2skill.com)
 [![Challenge](https://img.shields.io/badge/Main%20Challenge-06%3A%20Urban%20Air%20Quality-emerald)](https://promptwars.in/promptwarsVirtual.html)
+[![AI Score](https://img.shields.io/badge/Official%20AI%20Score-96.62%20%2F%20100-success)](https://hack2skill.com)
+[![Rank](https://img.shields.io/badge/Leaderboard%20Rank-%23189%20%2F%2055%2C084-blueviolet)](https://hack2skill.com)
 [![Participant](https://img.shields.io/badge/Participant-Rajiv%20Kumar%20Sharma-orange)](https://www.linkedin.com/in/rajiv-kumar-sharma-497a58246/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+
+---
+
+### 🔗 Official Live Links & Evidence
+- 🌐 **Live Web Application:** [https://rajivsharma8757.github.io/breathewise-ai/](https://rajivsharma8757.github.io/breathewise-ai/)
+- 💻 **Public GitHub Repository:** [https://github.com/rajivsharma8757/breathewise-ai](https://github.com/rajivsharma8757/breathewise-ai)
+- 🎥 **HD Project Video Demo:** [breathewise_ai_demo.mp4](https://github.com/rajivsharma8757/breathewise-ai/releases/download/v1.0.0/breathewise_ai_demo.mp4)
+- 📱 **Official Instagram Reel:** [https://www.instagram.com/reel/DgF_f6Lorzx/](https://www.instagram.com/reel/DgF_f6Lorzx/)
+- 💼 **LinkedIn Public Post:** [https://www.linkedin.com/feed/update/urn:li:activity:7530677533718032385/](https://www.linkedin.com/feed/update/urn:li:activity:7530677533718032385/)
+- 📄 **Final Mission Accomplished Report:** [docs/FINAL_MISSION_ACCOMPLISHED_TODAY.md](docs/FINAL_MISSION_ACCOMPLISHED_TODAY.md)
 
 ---
 
